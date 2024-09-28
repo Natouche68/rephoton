@@ -1,0 +1,57 @@
+[gd_scene load_steps=3 format=3 uid="uid://fybsmq3ufvt"]
+
+[ext_resource type="Texture2D" uid="uid://cxx15twf6qj3k" path="res://assets/test_image.jpg" id="1_dvy24"]
+[ext_resource type="Script" path="res://scenes/editor.gd" id="1_etupm"]
+
+[node name="Editor" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_etupm")
+
+[node name="Image" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -423.5
+offset_bottom = 296.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_dvy24")
+expand_mode = 5
+
+[node name="WarmSlider" type="HSlider" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 45.0
+offset_top = -119.0
+offset_right = 275.0
+offset_bottom = -103.0
+grow_vertical = 0
+min_value = -1.0
+max_value = 1.0
+step = 0.01
+
+[node name="TintSlider" type="HSlider" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 45.0
+offset_top = -83.0
+offset_right = 275.0
+offset_bottom = -67.0
+grow_vertical = 0
+min_value = -1.0
+max_value = 1.0
+step = 0.01
+
+[connection signal="value_changed" from="WarmSlider" to="." method="_on_warm_slider_value_changed"]
+[connection signal="value_changed" from="TintSlider" to="." method="_on_tint_slider_value_changed"]
