@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://fybsmq3ufvt"]
+[gd_scene load_steps=5 format=3 uid="uid://fybsmq3ufvt"]
 
 [ext_resource type="Texture2D" uid="uid://cxx15twf6qj3k" path="res://assets/test_image.jpg" id="1_dvy24"]
-[ext_resource type="Script" path="res://scenes/editor.gd" id="1_etupm"]
+[ext_resource type="Script" path="res://scripts/editor.gd" id="1_etupm"]
+[ext_resource type="Shader" path="res://shaders/image_editing.gdshader" id="2_soy58"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4y30d"]
+shader = ExtResource("2_soy58")
+shader_parameter/modulate = Color(1, 1, 1, 1)
+shader_parameter/saturation = 1.0
 
 [node name="Editor" type="Control"]
 layout_mode = 3
@@ -13,6 +19,7 @@ grow_vertical = 2
 script = ExtResource("1_etupm")
 
 [node name="Image" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_4y30d")
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -30,9 +37,9 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 45.0
+offset_left = 28.0
 offset_top = -119.0
-offset_right = 275.0
+offset_right = 258.0
 offset_bottom = -103.0
 grow_vertical = 0
 min_value = -1.0
@@ -44,14 +51,32 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 45.0
+offset_left = 28.0
 offset_top = -83.0
-offset_right = 275.0
+offset_right = 258.0
 offset_bottom = -67.0
 grow_vertical = 0
 min_value = -1.0
 max_value = 1.0
 step = 0.01
 
+[node name="SaturationSlider" type="HSlider" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -249.0
+offset_top = -120.0
+offset_right = -19.0
+offset_bottom = -104.0
+grow_horizontal = 0
+grow_vertical = 0
+max_value = 2.0
+step = 0.01
+value = 1.0
+
 [connection signal="value_changed" from="WarmSlider" to="." method="_on_warm_slider_value_changed"]
 [connection signal="value_changed" from="TintSlider" to="." method="_on_tint_slider_value_changed"]
+[connection signal="value_changed" from="SaturationSlider" to="." method="_on_saturation_slider_value_changed"]
