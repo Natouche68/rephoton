@@ -8,6 +8,7 @@
 shader = ExtResource("2_soy58")
 shader_parameter/modulate = Color(1, 1, 1, 1)
 shader_parameter/saturation = 1.0
+shader_parameter/vignette = 0.0
 
 [node name="Editor" type="Control"]
 layout_mode = 3
@@ -77,6 +78,23 @@ max_value = 2.0
 step = 0.01
 value = 1.0
 
+[node name="VignetteSlider" type="HSlider" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -249.0
+offset_top = -83.0
+offset_right = -19.0
+offset_bottom = -67.0
+grow_horizontal = 0
+grow_vertical = 0
+max_value = 1.0
+step = 0.01
+
 [connection signal="value_changed" from="WarmSlider" to="." method="_on_warm_slider_value_changed"]
 [connection signal="value_changed" from="TintSlider" to="." method="_on_tint_slider_value_changed"]
 [connection signal="value_changed" from="SaturationSlider" to="." method="_on_saturation_slider_value_changed"]
+[connection signal="value_changed" from="VignetteSlider" to="." method="_on_vignette_slider_value_changed"]

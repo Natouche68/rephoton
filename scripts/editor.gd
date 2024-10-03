@@ -4,6 +4,7 @@ extends Control
 var warm_color: Color = Color(1, 1, 1)
 var tint_color: Color = Color(1, 1, 1)
 var saturation: float = 1
+var vignette: float = 0
 
 
 func _on_warm_slider_value_changed(value: float) -> void:
@@ -29,6 +30,12 @@ func _on_saturation_slider_value_changed(value: float) -> void:
 	
 	calculate_colors()
 
+func _on_vignette_slider_value_changed(value: float) -> void:
+	vignette = value
+	
+	calculate_colors()
+
 func calculate_colors():
 	$Image.material.set_shader_parameter("modulate", (warm_color + tint_color) / 2)
 	$Image.material.set_shader_parameter("saturation", saturation)
+	$Image.material.set_shader_parameter("vignette", vignette)
