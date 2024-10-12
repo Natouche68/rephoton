@@ -36,54 +36,15 @@ grow_vertical = 2
 texture = ExtResource("1_dvy24")
 expand_mode = 5
 
-[node name="WarmSlider" parent="." instance=ExtResource("4_2ui2m")]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 47.0
-offset_top = -160.0
-offset_right = 239.0
-offset_bottom = -128.0
-grow_vertical = 0
-min_value = -1
-
-[node name="SaturationSlider" parent="." instance=ExtResource("4_2ui2m")]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 47.0
-offset_top = -112.0
-offset_right = 239.0
-offset_bottom = -80.0
-grow_vertical = 0
-max_value = 2
-start_value = 1
-
-[node name="VignetteSlider" parent="." instance=ExtResource("4_2ui2m")]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 47.0
-offset_top = -64.0
-offset_right = 239.0
-offset_bottom = -32.0
-grow_vertical = 0
-
 [node name="ColorAdjust" type="Control" parent="."]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
+anchors_preset = 2
 anchor_top = 1.0
-anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -177.0
-offset_top = -160.0
-offset_right = -49.0
-offset_bottom = -32.0
-grow_horizontal = 0
+offset_left = 72.0
+offset_top = -158.0
+offset_right = 200.0
+offset_bottom = -30.0
 grow_vertical = 0
 
 [node name="Background" type="TextureRect" parent="ColorAdjust"]
@@ -110,6 +71,16 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_bk2ry")
 
-[connection signal="value_changed" from="WarmSlider" to="." method="_on_warm_slider_value_changed"]
-[connection signal="value_changed" from="SaturationSlider" to="." method="_on_saturation_slider_value_changed"]
+[node name="VignetteSlider" parent="." instance=ExtResource("4_2ui2m")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 293.0
+offset_top = -149.0
+offset_right = 485.0
+offset_bottom = -117.0
+grow_vertical = 0
+
+[connection signal="gui_input" from="ColorAdjust" to="." method="_on_color_adjust_gui_input"]
 [connection signal="value_changed" from="VignetteSlider" to="." method="_on_vignette_slider_value_changed"]
