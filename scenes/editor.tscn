@@ -22,32 +22,34 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_etupm")
 
-[node name="Image" type="TextureRect" parent="."]
-material = SubResource("ShaderMaterial_4y30d")
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -423.5
-offset_bottom = 296.5
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Image" type="TextureRect" parent="VBoxContainer"]
+material = SubResource("ShaderMaterial_4y30d")
+layout_mode = 2
 texture = ExtResource("1_dvy24")
 expand_mode = 5
 
-[node name="ColorAdjust" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 72.0
-offset_top = -158.0
-offset_right = 200.0
-offset_bottom = -30.0
-grow_vertical = 0
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 192)
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
 
-[node name="Background" type="TextureRect" parent="ColorAdjust"]
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="ColorAdjust" type="Control" parent="VBoxContainer/HBoxContainer/AspectRatioContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Background" type="TextureRect" parent="VBoxContainer/HBoxContainer/AspectRatioContainer/ColorAdjust"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -56,7 +58,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_3ywb3")
 
-[node name="Pointer" type="TextureRect" parent="ColorAdjust"]
+[node name="Pointer" type="TextureRect" parent="VBoxContainer/HBoxContainer/AspectRatioContainer/ColorAdjust"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -71,16 +73,12 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_bk2ry")
 
-[node name="VignetteSlider" parent="." instance=ExtResource("4_2ui2m")]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 293.0
-offset_top = -149.0
-offset_right = 485.0
-offset_bottom = -117.0
-grow_vertical = 0
+[node name="Space" type="Control" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
 
-[connection signal="gui_input" from="ColorAdjust" to="." method="_on_color_adjust_gui_input"]
-[connection signal="value_changed" from="VignetteSlider" to="." method="_on_vignette_slider_value_changed"]
+[node name="VignetteSlider" parent="VBoxContainer/HBoxContainer" instance=ExtResource("4_2ui2m")]
+layout_mode = 2
+
+[connection signal="gui_input" from="VBoxContainer/HBoxContainer/AspectRatioContainer/ColorAdjust" to="." method="_on_color_adjust_gui_input"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/VignetteSlider" to="." method="_on_vignette_slider_value_changed"]
