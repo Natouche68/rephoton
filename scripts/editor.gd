@@ -2,8 +2,9 @@ extends Control
 
 
 var warm_color: Color = Color(1, 1, 1)
-var saturation: float = 1
 var brightness: float = 1
+var contrast: float = 0
+var saturation: float = 1
 var vignette: float = 0
 
 
@@ -32,15 +33,18 @@ func _on_color_adjust_gui_input(event: InputEvent) -> void:
 
 func _on_brightness_slider_value_changed(value: float) -> void:
 	brightness = value / 2 + 0.5
-	
+	calculate_colors()
+
+func _on_contrast_slider_value_changed(value: float) -> void:
+	contrast = value
 	calculate_colors()
 
 func _on_vignette_slider_value_changed(value: float) -> void:
 	vignette = value
-	
 	calculate_colors()
 
 func calculate_colors():
 	%Image.material.set_shader_parameter("modulate", warm_color * brightness)
 	%Image.material.set_shader_parameter("saturation", saturation)
+	%Image.material.set_shader_parameter("contrast", contrast)
 	%Image.material.set_shader_parameter("vignette", vignette)

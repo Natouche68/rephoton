@@ -2,6 +2,7 @@ shader_type canvas_item;
 
 uniform vec4 modulate: source_color = vec4(1.0, 1.0, 1.0, 1.0);
 uniform float saturation: hint_range(0.0, 2.0) = 1.0;
+uniform float contrast: hint_range(-1.0, 1.0) = 0.0;
 uniform float vignette: hint_range(0.0, 1.0) = 0.0;
 
 void fragment() {
@@ -12,6 +13,14 @@ void fragment() {
 		pixel_color.r * modulate.r,
 		pixel_color.g * modulate.g,
 		pixel_color.b * modulate.b,
+		pixel_color.a
+	);
+	
+	// Contrast
+	pixel_color = vec4(
+		pixel_color.r * (1.0 + contrast * 0.4) - contrast * 0.2,
+		pixel_color.g * (1.0 + contrast * 0.4) - contrast * 0.2,
+		pixel_color.b * (1.0 + contrast * 0.4) - contrast * 0.2,
 		pixel_color.a
 	);
 	
