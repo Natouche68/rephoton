@@ -92,8 +92,19 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_bk2ry")
 
-[node name="VignetteSlider" parent="VContainer/HContainer" instance=ExtResource("4_2ui2m")]
+[node name="VContainer" type="VBoxContainer" parent="VContainer/HContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="BrightnessSlider" parent="VContainer/HContainer/VContainer" instance=ExtResource("4_2ui2m")]
+layout_mode = 2
+max_value = 2
+start_value = 1
+
+[node name="VignetteSlider" parent="VContainer/HContainer/VContainer" instance=ExtResource("4_2ui2m")]
 layout_mode = 2
 
 [connection signal="gui_input" from="VContainer/HContainer/RatioContainer/ColorAdjust" to="." method="_on_color_adjust_gui_input"]
-[connection signal="value_changed" from="VContainer/HContainer/VignetteSlider" to="." method="_on_vignette_slider_value_changed"]
+[connection signal="value_changed" from="VContainer/HContainer/VContainer/BrightnessSlider" to="." method="_on_brightness_slider_value_changed"]
+[connection signal="value_changed" from="VContainer/HContainer/VContainer/VignetteSlider" to="." method="_on_vignette_slider_value_changed"]
